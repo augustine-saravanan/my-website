@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BBPS Knowledge Base — Setu + Axis Bank</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#ffffff;--bg2:#f5f4f0;--bg3:#eeedea;
+    --text:#1a1a18;--text2:#5f5e5a;--text3:#8a8880;
+    --border:#d3d1c7;--border2:#b4b2a9;
+    --blue-bg:#e6f1fb;--blue-text:#0c447c;--blue-border:#185fa5;
+    --green-bg:#eaf3de;--green-text:#27500a;--green-border:#3b6d11;
+    --amber-bg:#faeeda;--amber-text:#633806;--amber-border:#854f0b;
+    --red-bg:#fcebeb;--red-text:#791f1f;--red-border:#a32d2d;
+    --purple-bg:#eeedfe;--purple-text:#3c3489;--purple-border:#534ab7;
+    --teal-bg:#e1f5ee;--teal-text:#085041;--teal-border:#0f6e56;
+    --coral-bg:#faece7;--coral-text:#712b13;--coral-border:#993c1d;
+    --radius:8px;--radius-lg:12px;
+  }
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg3);color:var(--text);line-height:1.7;font-size:15px}
+  .page{max-width:780px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+  /* Hero */
+  .hero{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:2rem;margin-bottom:2rem}
+  .hero h1{font-size:26px;font-weight:600;margin-bottom:8px}
+  .hero p{color:var(--text2);font-size:14px;line-height:1.7}
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .pill{font-size:12px;padding:3px 10px;border-radius:20px;border:1px solid var(--border2);color:var(--text2);background:var(--bg2)}
+
+  /* TOC */
+  .toc{background:var(--bg2);border-radius:var(--radius-lg);padding:1.25rem 1.5rem;margin-bottom:2rem;border:1px solid var(--border)}
+  .toc-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+  .toc a{display:block;font-size:13px;color:var(--blue-text);padding:3px 0;text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+
+  /* Sections */
+  .section{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:1.75rem;margin-bottom:1.5rem}
+  .section-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+  .section h2{font-size:20px;font-weight:600;margin-bottom:.75rem}
+  .body-text{font-size:14px;color:var(--text2);line-height:1.8;margin-bottom:1rem}
+
+  /* Callouts */
+  .callout{border-left:3px solid var(--blue-border);background:var(--blue-bg);border-radius:0 8px 8px 0;padding:10px 14px;margin:1rem 0;font-size:13px;color:var(--blue-text);line-height:1.6}
+  .callout.warn{border-color:var(--amber-border);background:var(--amber-bg);color:var(--amber-text)}
+  .callout.success{border-color:var(--green-border);background:var(--green-bg);color:var(--green-text)}
+  .callout.danger{border-color:var(--red-border);background:var(--red-bg);color:var(--red-text)}
+
+  /* Cards */
+  .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:1rem 0}
+  .card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem}
+  .card-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+  .card h3{font-size:14px;font-weight:600;margin-bottom:5px}
+  .card p{font-size:12px;color:var(--text2);line-height:1.6}
+
+  /* Rules */
+  .rule-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+  .rule-num{width:24px;height:24px;border-radius:50%;background:var(--bg2);border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--text2);flex-shrink:0;margin-top:2px}
+  .rule-text{font-size:13px;color:var(--text2);line-height:1.65}
+  .rule-text strong{color:var(--text);font-weight:600}
+
+  /* Flow nodes inline */
+  .flow-row{display:flex;align-items:center;flex-wrap:wrap;gap:0;margin:10px 0}
+  .fn{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:5px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+  .fa{font-size:13px;color:var(--text3);padding:0 5px}
+  .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:600}
+  .badge-blue{background:var(--blue-bg);color:var(--blue-text)}
+  .badge-green{background:var(--green-bg);color:var(--green-text)}
+  .badge-amber{background:var(--amber-bg);color:var(--amber-text)}
+
+  /* Divider */
+  hr{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+
+  /* Interactive tabs */
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .tab{font-size:12px;padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:inherit}
+  .tab.active{background:var(--bg2);color:var(--text);border-color:var(--border2)}
+  .panel{display:none}.panel.active{display:block}
+  .step-panel{background:var(--bg2);border-radius:var(--radius-lg);padding:1rem 1.25rem;min-height:100px}
+  .step-panel h4{font-size:14px;font-weight:600;margin-bottom:6px}
+  .step-panel p{font-size:13px;color:var(--text2);line-height:1.65}
+  .step-panel code{font-family:monospace;font-size:11px;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:1px 5px}
+
+  /* SVG diagrams */
+  .diagram{width:100%;overflow-x:auto;margin:1rem 0}
+
+  /* API cards */
+  .api-card{border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin:10px 0}
+  .api-header{padding:10px 14px;display:flex;align-items:center;gap:10px;background:var(--bg2)}
+  .api-method{font-family:monospace;font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--green-bg);color:var(--green-text)}
+  .api-path{font-family:monospace;font-size:12px}
+  .api-body{padding:12px 14px}
+  .api-body p{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:8px}
+  .mono-block{font-family:monospace;font-size:11px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;margin:8px 0;line-height:1.8;overflow-x:auto;white-space:pre}
+
+  /* BOU interactive */
+  .bou-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .bou-tab{font-size:12px;padding:5px 14px;border-radius:20px;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;font-family:inherit}
+  .bou-tab.active{background:var(--bg2);color:var(--text);border-color:var(--border2)}
+  .bou-panel{display:none}.bou-panel.active{display:block}
+  .flow-node-el{border:1px solid var(--border2);border-radius:var(--radius);padding:7px 11px;font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;background:var(--bg);transition:all .3s}
+  .flow-node-el.lit{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue-text)}
+  .flow-node-el.success-lit{background:var(--green-bg);border-color:var(--green-border);color:var(--green-text)}
+  .flow-node-el.warn-lit{background:var(--amber-bg);border-color:var(--amber-border);color:var(--amber-text)}
+  .flow-arr-el{font-size:13px;color:var(--text3);padding:0 4px;flex-shrink:0}
+  .flow-arr-el.lit{color:var(--blue-text)}
+  .timer-bar{height:10px;border-radius:5px;background:var(--bg2);border:1px solid var(--border);overflow:hidden;margin:6px 0}
+  .timer-fill{height:100%;border-radius:5px;transition:width .05s linear;background:#3b6d11}
+  .timer-fill.amber-fill{background:#854f0b}
+  .timer-fill.red-fill{background:#a32d2d}
+  .timer-fill.blue-fill{background:#185fa5}
+  .log-box{font-family:monospace;font-size:11px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;margin:10px 0;line-height:2;min-height:80px;max-height:160px;overflow-y:auto}
+  .log-line{color:var(--text2)}
+  .log-line.success{color:var(--green-text)}
+  .log-line.warn{color:var(--amber-text)}
+  .log-line.danger{color:var(--red-text)}
+  .ctrl-btn{font-size:12px;padding:5px 14px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text);cursor:pointer;font-family:inherit;margin:4px 4px 4px 0}
+  .ctrl-btn:hover{background:var(--bg3)}
+  .stat-row{display:flex;gap:10px;margin:10px 0;flex-wrap:wrap}
+  .stat{background:var(--bg2);border-radius:var(--radius);padding:10px 14px;flex:1;min-width:100px}
+  .stat-label{font-size:11px;color:var(--text3);margin-bottom:3px}
+  .stat-val{font-size:20px;font-weight:600}
+  .stat-sub{font-size:10px;color:var(--text3);margin-top:2px}
+  .loop-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;background:var(--blue-bg);color:var(--blue-text);margin-left:8px;font-weight:600}
+  .node-row{display:flex;align-items:center;gap:0;flex-wrap:wrap;margin:14px 0}
+
+  /* Model compare */
+  .model-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1rem 0}
+  .model-card{border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+  .model-hdr{padding:10px 14px;font-size:13px;font-weight:600}
+  .model-hdr.rt{background:var(--blue-bg);color:var(--blue-text)}
+  .model-hdr.dm{background:var(--green-bg);color:var(--green-text)}
+  .model-body{padding:12px 14px}
+  .model-step{font-size:12px;color:var(--text2);line-height:1.7;padding:3px 0;border-bottom:1px solid var(--border)}
+  .model-step:last-child{border:none}
+  .model-step strong{color:var(--text)}
+
+  /* Footer */
+  .footer{text-align:center;font-size:12px;color:var(--text3);padding:2rem 0 1rem}
+
+  @media(max-width:600px){
+    .card-grid{grid-template-columns:1fr}
+    .model-grid{grid-template-columns:1fr}
+    .hero h1{font-size:20px}
+    .section h2{font-size:17px}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="section-label">Internal Knowledge Base</div>
+  <h1>BBPS — Complete Guide</h1>
+  <p>Bharat Bill Payment System: how the COU structure, BOU operations, APIs, and money flow actually work — from NPCI all the way to your customer's screen. Built for the Setu + Axis Bank environment.</p>
+  <div class="pill-row">
+    <span class="pill">Setu + Axis Bank</span>
+    <span class="pill">COU / BOU Architecture</span>
+    <span class="pill">3 Core APIs</span>
+    <span class="pill">Real-time vs Deemed</span>
+    <span class="pill">Agent Hierarchy</span>
+    <span class="pill">Payment Flow</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <a href="#s1">1. The highway analogy — who's who</a>
+  <a href="#s2">2. The COU hierarchy — OU, AI, and Agents</a>
+  <a href="#s3">3. How money actually moves</a>
+  <a href="#s4">4. The Biller side — BOU explained</a>
+  <a href="#s5">5. The 3 core APIs</a>
+  <a href="#s6">6. BOU in action — 4 interactive flows</a>
+  <a href="#s7">7. The 3 integration models (Setu)</a>
+  <a href="#s8">8. The 5 golden rules</a>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section" id="s1">
+  <div class="section-label">Section 1</div>
+  <h2>The highway analogy — who's who</h2>
+  <p class="body-text">Think of BBPS as a national highway system. Money is the cargo, and it needs to travel from a customer in one city to a biller (electricity company, FASTag provider, gas board) in another. Four parties make this work:</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">NPCI</div>
+      <h3>Highway Authority</h3>
+      <p>Sets the rules, maintains the road, operates the central clearing house. Every transaction passes through here.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Axis Bank</div>
+      <h3>Licensed Fleet</h3>
+      <p>The only one legally allowed to move money. Holds the BBPS license, settlement account, and compliance responsibility.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Setu</div>
+      <h3>GPS &amp; Engine</h3>
+      <p>Technology that makes the car move. Provides APIs, encryption, routing logic, and biller integration. Cannot operate without Axis Bank.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Biller</div>
+      <h3>Destination Factory</h3>
+      <p>The electricity board, gas provider, FASTag issuer. Receives the payment. Plugs in via the BOU layer.</p>
+    </div>
+  </div>
+  <div class="callout">A TSP (Technology Service Provider) like Setu cannot connect to NPCI independently — it must be anchored to a Sponsor Bank. The bank provides the legal and financial validity that Setu alone cannot.</div>
+  <p class="body-text">The structural chain:</p>
+  <div class="flow-row">
+    <div class="fn">Setu (TSP)</div><div class="fa">→</div>
+    <div class="fn">Axis Bank (OU)</div><div class="fa">→</div>
+    <div class="fn">NPCI BBPS</div>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section" id="s2">
+  <div class="section-label">Section 2</div>
+  <h2>The COU hierarchy — OU, AI, and Agents</h2>
+  <p class="body-text">The customer-side of BBPS (COU — Customer Operating Unit) has a strict four-level hierarchy. Think of it like a university system:</p>
+
+  <div class="diagram">
+    <svg width="100%" viewBox="0 0 680 340" role="img">
+      <title>BBPS COU Hierarchy</title>
+      <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#888780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <!-- NPCI -->
+      <rect x="240" y="12" width="200" height="50" rx="8" fill="#eeedfe" stroke="#534ab7" stroke-width="0.5"/>
+      <text x="340" y="33" text-anchor="middle" font-size="14" font-weight="600" fill="#3c3489" font-family="system-ui,sans-serif">NPCI</text>
+      <text x="340" y="50" text-anchor="middle" font-size="11" fill="#534ab7" font-family="system-ui,sans-serif">National clearing house</text>
+      <text x="458" y="38" font-size="11" fill="#8a8880" font-family="system-ui,sans-serif">= University Group</text>
+      <line x1="340" y1="62" x2="340" y2="94" stroke="#b4b2a9" stroke-width="0.5" marker-end="url(#arr)"/>
+      <!-- OU -->
+      <rect x="215" y="94" width="250" height="50" rx="8" fill="#e1f5ee" stroke="#0f6e56" stroke-width="0.5"/>
+      <text x="340" y="115" text-anchor="middle" font-size="14" font-weight="600" fill="#085041" font-family="system-ui,sans-serif">Operating Unit (OU)</text>
+      <text x="340" y="132" text-anchor="middle" font-size="11" fill="#0f6e56" font-family="system-ui,sans-serif">e.g. Axis Bank — holds funds, compliance</text>
+      <text x="472" y="120" font-size="11" fill="#8a8880" font-family="system-ui,sans-serif">= University</text>
+      <line x1="340" y1="144" x2="340" y2="176" stroke="#b4b2a9" stroke-width="0.5" marker-end="url(#arr)"/>
+      <!-- AI -->
+      <rect x="215" y="176" width="250" height="50" rx="8" fill="#faece7" stroke="#993c1d" stroke-width="0.5"/>
+      <text x="340" y="197" text-anchor="middle" font-size="14" font-weight="600" fill="#712b13" font-family="system-ui,sans-serif">Agent Institution (AI)</text>
+      <text x="340" y="214" text-anchor="middle" font-size="11" fill="#993c1d" font-family="system-ui,sans-serif">e.g. Setu — routes, manages agents</text>
+      <text x="472" y="202" font-size="11" fill="#8a8880" font-family="system-ui,sans-serif">= College</text>
+      <line x1="340" y1="226" x2="340" y2="258" stroke="#b4b2a9" stroke-width="0.5" marker-end="url(#arr)"/>
+      <!-- Agents -->
+      <rect x="100" y="258" width="480" height="50" rx="8" fill="#faeeda" stroke="#854f0b" stroke-width="0.5"/>
+      <text x="340" y="279" text-anchor="middle" font-size="14" font-weight="600" fill="#633806" font-family="system-ui,sans-serif">Agents</text>
+      <text x="340" y="297" text-anchor="middle" font-size="11" fill="#854f0b" font-family="system-ui,sans-serif">PhonePe · Google Pay · CRED · Merchants · Apps</text>
+      <!-- Rule box -->
+      <rect x="100" y="318" width="480" height="18" rx="4" fill="none" stroke="#a32d2d" stroke-width="0.5" stroke-dasharray="3 3"/>
+      <text x="340" y="330" text-anchor="middle" font-size="11" fill="#791f1f" font-family="system-ui,sans-serif">Only Agents can perform transactions — OU and AI cannot transact directly</text>
+    </svg>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">OU — Operating Unit</div>
+      <h3>Axis Bank</h3>
+      <p>Holds settlement funds. Owns the NPCI license. Compliance and risk. Does NOT perform transactions directly.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">AI — Agent Institution</div>
+      <h3>Setu</h3>
+      <p>Technology aggregator. Manages agents, float balances, routes payments. At least one AI must exist per OU.</p>
+    </div>
+  </div>
+
+  <div class="callout">Agent IDs are structured: <strong>AS01-A02-MOB-005</strong> — AS01 = Axis Bank (OU), A02 = Agent Institution, MOB = Mobile channel, 005 = agent number. This ID travels with every transaction.</div>
+  <p class="body-text">All white label customers sit under a single AI node (e.g. AS03). NPCI validates the UI once — every new white label agent inherits that approval. Faster onboarding, lower cost, central control.</p>
+</div>
+
+<!-- SECTION 3 -->
+<div class="section" id="s3">
+  <div class="section-label">Section 3</div>
+  <h2>How money actually moves</h2>
+  <p class="body-text">Before NPCI ever sees a payment request, something critical happens internally. Here's a ₹100 bill payment, step by step:</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('flow','s0')">① Customer pays</button>
+    <button class="tab" onclick="showTab('flow','s1')">② Balance check</button>
+    <button class="tab" onclick="showTab('flow','s2')">③ Fund transfer</button>
+    <button class="tab" onclick="showTab('flow','s3')">④ NPCI request</button>
+    <button class="tab" onclick="showTab('flow','s4')">⑤ Settlement</button>
+    <button class="tab" onclick="showTab('flow','s5')">↩ Refund</button>
+  </div>
+  <div class="step-panel" id="flow-panel"></div>
+
+  <div class="callout warn" style="margin-top:1rem">The internal fund transfer (step 3) is the most critical control. If the agent has insufficient balance, the transaction is rejected locally — NPCI never sees it. This protects Axis Bank from any exposure.</div>
+
+  <p class="body-text" style="margin-top:1rem">The direction of money is always consistent:</p>
+  <div style="margin-bottom:6px"><span class="badge badge-blue">Payment</span>
+    <div class="flow-row" style="margin-top:6px">
+      <div class="fn">Customer</div><div class="fa">→</div><div class="fn">Agent</div><div class="fa">→</div><div class="fn">AI (Setu)</div><div class="fa">→</div><div class="fn">OU (Axis)</div><div class="fa">→</div><div class="fn">NPCI</div><div class="fa">→</div><div class="fn">Biller</div>
+    </div>
+  </div>
+  <div><span class="badge badge-amber">Refund</span>
+    <div class="flow-row" style="margin-top:6px">
+      <div class="fn">NPCI</div><div class="fa">→</div><div class="fn">OU</div><div class="fa">→</div><div class="fn">AI</div><div class="fa">→</div><div class="fn">Agent</div><div class="fa">→</div><div class="fn">Customer</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section" id="s4">
+  <div class="section-label">Section 4</div>
+  <h2>The Biller side — BOU explained</h2>
+  <p class="body-text">Everything so far has been the customer side. The Biller Operating Unit (BOU) is the entrance ramp for billers — how an electricity board or gas provider plugs in to BBPS. Setu acts as the BOU in your environment.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">BOU role</div>
+      <h3>Setu (as BOU)</h3>
+      <p>Provides the API layer, encryption, and integration logic between the biller's backend and the BBPS network.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Biller's job</div>
+      <h3>Validate &amp; Acknowledge</h3>
+      <p>Confirm the customer ID exists, return bill details, and acknowledge that a payment has been received.</p>
+    </div>
+  </div>
+  <p class="body-text">Onboarding a biller (AOI flow — Agent Onboarding Integration):</p>
+  <div class="rule-row"><div class="rule-num">1</div><div class="rule-text"><strong>Agreement</strong> — Biller signs with Axis Bank. Legal and commercial terms established.</div></div>
+  <div class="rule-row"><div class="rule-num">2</div><div class="rule-text"><strong>Tech sync</strong> — Setu connects the biller's backend to the BBPS APIs. Integration and testing.</div></div>
+  <div class="rule-row"><div class="rule-num">3</div><div class="rule-text"><strong>Certification</strong> — NPCI approves and certifies the integration. Biller goes live.</div></div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section" id="s5">
+  <div class="section-label">Section 5</div>
+  <h2>The 3 core APIs — heartbeat of every transaction</h2>
+
+  <div class="api-card">
+    <div class="api-header">
+      <span class="api-method">POST</span>
+      <span class="api-path">/bbps/bills/fetch/request</span>
+      <span class="badge badge-blue" style="margin-left:auto">Bill Fetch</span>
+    </div>
+    <div class="api-body">
+      <p>The Lookup. Confirms the customer exists and how much they owe. Always called before any payment.</p>
+      <div class="flow-row" style="margin-bottom:8px">
+        <div class="fn">Customer App</div><div class="fa">→</div><div class="fn">BBPS</div><div class="fa">→</div><div class="fn">Setu</div><div class="fa">→</div><div class="fn">Biller backend</div>
+      </div>
+      <div class="mono-block">Request:
+{ "customerIdentifiers": [{ "attributeName": "customerId", "attributeValue": "9117534711" }] }
+
+Response:
+{ "data": { "billDetails": { "billFetchStatus": "NO_OUTSTANDING" },
+    "customer": { "name": "Sharmaji Ka Beta" } }, "success": true }</div>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-header">
+      <span class="api-method">POST</span>
+      <span class="api-path">/bbps/bills/payment</span>
+      <span class="badge badge-green" style="margin-left:auto">Payment</span>
+    </div>
+    <div class="api-body">
+      <p>The Action. Initiates the actual money transfer. Golden rule: the entire cycle must complete within <strong>180 seconds</strong>. Setu manages the biller acknowledgement window — up to 120 seconds of that.</p>
+      <div class="callout warn">180 seconds total. Setu holds 120 seconds for biller acknowledgement. Remaining 60 seconds is the buffer for NPCI confirmation.</div>
+    </div>
+  </div>
+
+  <div class="api-card">
+    <div class="api-header">
+      <span class="api-method">POST</span>
+      <span class="api-path">/bbps/bills/status</span>
+      <span class="badge badge-amber" style="margin-left:auto">CTS</span>
+    </div>
+    <div class="api-body">
+      <p>Check Transaction Status — the safety net. Used when a biller's server times out. Setu asks "did that payment eventually land?" instead of leaving the transaction in limbo. Used every time in the Deemed model for final ground truth.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6 — BOU INTERACTIVE -->
+<div class="section" id="s6">
+  <div class="section-label">Section 6</div>
+  <h2>BOU in action — 4 interactive flows</h2>
+  <p class="body-text">Every BBPS transaction goes through up to four flows. Select a flow to animate it step by step.</p>
+
+  <div class="bou-tabs">
+    <button class="bou-tab active" onclick="showBOU('fetch')">① Bill Fetch</button>
+    <button class="bou-tab" onclick="showBOU('payment')">② Payment API</button>
+    <button class="bou-tab" onclick="showBOU('realtime')">③ BOU Real-time</button>
+    <button class="bou-tab" onclick="showBOU('deemed')">④ BOU Deemed</button>
+  </div>
+
+  <!-- FETCH -->
+  <div id="bou-fetch" class="bou-panel active">
+    <div class="callout">The Lookup — confirms the customer exists and fetches their bill details before any money moves.</div>
+    <div class="node-row">
+      <div class="flow-node-el" id="fn0">Customer App</div><div class="flow-arr-el" id="fa0">→</div>
+      <div class="flow-node-el" id="fn1">Setu TSP</div><div class="flow-arr-el" id="fa1">→</div>
+      <div class="flow-node-el" id="fn2">Axis Bank</div><div class="flow-arr-el" id="fa2">→</div>
+      <div class="flow-node-el" id="fn3">BBPS (NPCI)</div><div class="flow-arr-el" id="fa3">→</div>
+      <div class="flow-node-el" id="fn4">Biller backend</div>
+    </div>
+    <div><button class="ctrl-btn" onclick="runFetch()">Run flow</button><button class="ctrl-btn" onclick="resetFetch()">Reset</button></div>
+    <div class="log-box" id="fetch-log"><div class="log-line">Ready — click Run flow</div></div>
+  </div>
+
+  <!-- PAYMENT -->
+  <div id="bou-payment" class="bou-panel">
+    <div class="callout warn">The Action — initiates real money movement. Total window: 180 seconds. Setu manages the biller ack loop within 120 seconds of that.</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-label">Total deadline</div><div class="stat-val">180s</div><div class="stat-sub">Transaction must close</div></div>
+      <div class="stat"><div class="stat-label">Setu response window</div><div class="stat-val">180s</div><div class="stat-sub">Setu's SLA to BBPS</div></div>
+      <div class="stat"><div class="stat-label">Biller ack. window</div><div class="stat-val">120s</div><div class="stat-sub">Setu waits for biller</div></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:#8a8880;margin-bottom:3px"><span>0s</span><span id="pay-elapsed">0s elapsed</span><span>180s</span></div>
+    <div class="timer-bar"><div class="timer-fill" id="pay-bar" style="width:0%"></div></div>
+    <div class="node-row">
+      <div class="flow-node-el" id="pn0">Customer App</div><div class="flow-arr-el" id="pa0">→</div>
+      <div class="flow-node-el" id="pn1">Setu TSP</div><div class="flow-arr-el" id="pa1">→</div>
+      <div class="flow-node-el" id="pn2">Axis Bank</div><div class="flow-arr-el" id="pa2">→</div>
+      <div class="flow-node-el" id="pn3">Setu (BOU)</div><div class="flow-arr-el" id="pa3">⇄</div>
+      <div class="flow-node-el" id="pn4">Biller</div>
+    </div>
+    <div style="font-size:11px;color:#8a8880;margin:2px 0 8px">Money movement (T+1): Axis Bank ← NPCI ← Biller Bank</div>
+    <div><button class="ctrl-btn" onclick="runPayment()">Simulate payment</button><button class="ctrl-btn" onclick="resetPayment()">Reset</button></div>
+    <div class="log-box" id="pay-log"><div class="log-line">Ready — click Simulate payment</div></div>
+  </div>
+
+  <!-- REAL-TIME -->
+  <div id="bou-realtime" class="bou-panel">
+    <div class="callout success">Synchronous — Setu waits for biller acknowledgement (max 120s) before confirming back to BBPS. Result: instant receipt generation on success.</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-label">Biller ack. window used</div><div class="stat-val" id="rt-elapsed">0s</div><div class="stat-sub">of 120s</div></div>
+      <div class="stat"><div class="stat-label">Total max loop</div><div class="stat-val">180s</div></div>
+      <div class="stat"><div class="stat-label">Status</div><div class="stat-val" id="rt-status" style="font-size:14px;margin-top:4px">Waiting</div></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:#8a8880;margin-bottom:3px"><span>Biller ack. timer</span><span id="rt-pct">0s / 120s</span></div>
+    <div class="timer-bar"><div class="timer-fill" id="rt-bar" style="width:0%"></div></div>
+    <div class="node-row">
+      <div class="flow-node-el" id="rtn0">Setu TSP</div><div class="flow-arr-el">→</div>
+      <div class="flow-node-el" id="rtn1">BBPS</div><div class="flow-arr-el">⇄</div>
+      <div class="flow-node-el" id="rtn2">Setu (BOU)</div><div class="flow-arr-el">⇄</div>
+      <div class="flow-node-el" id="rtn3">Biller</div><div class="flow-arr-el" style="color:transparent">→</div>
+      <div class="flow-node-el success-lit" id="rtn4" style="opacity:0;transition:opacity .4s">Receipt</div>
+    </div>
+    <div>
+      <button class="ctrl-btn" onclick="runRealtime(40)">Ack at 40s</button>
+      <button class="ctrl-btn" onclick="runRealtime(115)">Ack at 115s</button>
+      <button class="ctrl-btn" onclick="runRealtime(999)">No ack (timeout)</button>
+      <button class="ctrl-btn" onclick="resetRealtime()">Reset</button>
+    </div>
+    <div class="log-box" id="rt-log"><div class="log-line">Choose a scenario above to simulate</div></div>
+  </div>
+
+  <!-- DEEMED -->
+  <div id="bou-deemed" class="bou-panel">
+    <div class="callout">Asynchronous — Setu closes the NPCI loop immediately (Deemed Success), then notifies the biller via webhook with auto-retry until delivered. CTS API used every time for ground truth.</div>
+    <div class="node-row">
+      <div class="flow-node-el" id="dn0">Setu TSP</div><div class="flow-arr-el" id="da0">→</div>
+      <div class="flow-node-el" id="dn1">BBPS</div><div class="flow-arr-el">← ack</div>
+      <div class="flow-node-el" id="dn2">Deemed success</div><div class="flow-arr-el" style="color:transparent">→</div>
+      <div class="flow-node-el" id="dn3" style="opacity:0;transition:opacity .4s">Webhook → Biller</div>
+    </div>
+    <div id="deemed-retry" style="opacity:0;transition:opacity .4s;margin:10px 0">
+      <div style="font-size:12px;font-weight:600;color:#5f5e5a;margin-bottom:5px">Auto-retry loop <span class="loop-badge" id="retry-count">0 attempts</span></div>
+      <div class="timer-bar"><div class="timer-fill blue-fill" id="retry-bar" style="width:0%"></div></div>
+    </div>
+    <div><button class="ctrl-btn" onclick="runDeemed()">Run deemed flow</button><button class="ctrl-btn" onclick="resetDeemed()">Reset</button></div>
+    <div class="log-box" id="deemed-log"><div class="log-line">Ready — click Run deemed flow</div></div>
+    <div class="callout" style="margin-top:12px">CTS (Check Transaction Status) API is called every time in the deemed model to get the final ground-truth status — even after deemed success is declared.</div>
+
+    <hr>
+    <p class="body-text" style="margin-top:1rem">Side-by-side: Real-time vs Deemed</p>
+    <div class="model-grid">
+      <div class="model-card">
+        <div class="model-hdr rt">Model A — Real-time (synchronous)</div>
+        <div class="model-body">
+          <div class="model-step"><strong>1.</strong> NPCI sends payment response to Setu</div>
+          <div class="model-step"><strong>2.</strong> Setu forwards to biller</div>
+          <div class="model-step"><strong>3.</strong> Setu waits up to 120s for acknowledgement</div>
+          <div class="model-step"><strong>4.</strong> Once received → sends final status to NPCI</div>
+          <div class="model-step" style="color:#085041;font-weight:600">Max 180 seconds total</div>
+        </div>
+      </div>
+      <div class="model-card">
+        <div class="model-hdr dm">Model B — Deemed (asynchronous)</div>
+        <div class="model-body">
+          <div class="model-step"><strong>1.</strong> NPCI sends payment response to Setu</div>
+          <div class="model-step"><strong>2.</strong> Setu updates status immediately</div>
+          <div class="model-step"><strong>3.</strong> Setu closes loop with NPCI first</div>
+          <div class="model-step"><strong>4.</strong> Biller notified later via webhook + auto-retry</div>
+          <div class="model-step" style="color:#085041;font-weight:600">NPCI loop closed fast — biller async</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7 -->
+<div class="section" id="s7">
+  <div class="section-label">Section 7</div>
+  <h2>The 3 integration models (Setu)</h2>
+  <p class="body-text">Agents can integrate with Setu in three ways, trading control for speed of setup:</p>
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('int','i0')">API integration</button>
+    <button class="tab" onclick="showTab('int','i1')">White label</button>
+    <button class="tab" onclick="showTab('int','i2')">White label + custom pay</button>
+  </div>
+  <div class="step-panel" id="int-panel"></div>
+</div>
+
+<!-- SECTION 8 -->
+<div class="section" id="s8">
+  <div class="section-label">Section 8</div>
+  <h2>The 5 golden rules</h2>
+  <p class="body-text">Every operational decision in the Setu + Axis Bank environment flows from these five rules. If something isn't making sense, come back here.</p>
+
+  <div class="rule-row"><div class="rule-num">1</div><div class="rule-text"><strong>Only agents can transact.</strong> OU and AI are infrastructure, not transactors. A transaction must originate from an agent ID — never from Axis Bank or Setu directly.</div></div>
+  <div class="rule-row"><div class="rule-num">2</div><div class="rule-text"><strong>OU holds funds, AI manages agents.</strong> Axis Bank is always the settlement layer. Setu manages the agents below it and their float balances.</div></div>
+  <div class="rule-row"><div class="rule-num">3</div><div class="rule-text"><strong>Money flows upward on payment.</strong> Customer → Agent → AI → OU → NPCI → Biller. Always in this direction, no exceptions.</div></div>
+  <div class="rule-row"><div class="rule-num">4</div><div class="rule-text"><strong>Internal fund transfer happens before NPCI.</strong> Agent balance is checked and money moved to the float account first. If balance fails, NPCI never sees the transaction.</div></div>
+  <div class="rule-row"><div class="rule-num">5</div><div class="rule-text"><strong>Refunds flow downward, in exact reverse.</strong> NPCI → OU → AI → Agent → Customer. The chain works the same way in both directions.</div></div>
+
+  <div class="callout success" style="margin-top:1.5rem">Memorise rule 4. It's the most operationally important and the least obvious. The internal fund transfer is BBPS's built-in risk control — no balance, no exposure to the network.</div>
+</div>
+
+<div class="footer">BBPS Knowledge Base · Setu + Axis Bank · Internal Use</div>
+
+</div><!-- end .page -->
+
+<script>
+var flowSteps=[
+  {t:'① Customer pays — agent collects',b:'The customer pays ₹100 on an app like PhonePe. PhonePe (the Agent) collects the payment and holds it. At this point, money has not moved anywhere in the BBPS network yet.'},
+  {t:'② Balance check — internal gate',b:'Before anything is sent to NPCI, the system checks whether the agent has sufficient balance in its account with Setu. This is the critical gate. If balance is insufficient → transaction rejected locally, NPCI never sees it. If sufficient → proceed to step 3.'},
+  {t:'③ Internal fund transfer — the most important step',b:'Setu pulls ₹100 from the agent\'s account and moves it into Setu\'s float account at Axis Bank. This is called the Internal Fund Transfer. Money is now secured before the payment request goes out — this is what prevents bank losses.'},
+  {t:'④ NPCI payment request',b:'With funds secured in the float account, Setu now sends the payment request to NPCI. The 180-second window starts here. NPCI processes the payment and forwards it to the biller\'s bank.'},
+  {t:'⑤ Settlement confirmed',b:'NPCI confirms the payment has reached the biller\'s bank. Settlement happens on a net basis — Axis Bank\'s position with NPCI is updated. The agent gets confirmation, which propagates back to the customer\'s app.'},
+  {t:'↩ Refund flow — exact reverse',b:'If a refund is needed, the flow reverses completely:\n\nNPCI → Axis Bank (OU) → Setu (AI) → Agent → Customer\n\nNPCI credits Axis Bank, Axis Bank credits Setu, Setu credits the agent, agent refunds the customer. Same chain, opposite direction.'}
+];
+var intModels=[
+  {t:'API integration — agent builds everything',b:'Setu provides raw APIs only. The agent builds their own UI, screens, and payment flow. Requires: List API, Fetch API, Payment API, Dispute API.\n\nBecause the UI is custom, NPCI must validate the screens — they check that the BBPS logo is displayed and the flow meets guidelines before the agent can go live.'},
+  {t:'White label — Setu builds everything',b:'Setu provides the full UI, full flow, and payment handling. The agent only redirects users to Setu\'s hosted interface.\n\nBecause Setu\'s screens are already NPCI-certified, no additional screen validation is needed. All white label customers are onboarded under one AI node — the approval is inherited.'},
+  {t:'White label + custom payment gateway',b:'A hybrid model. Setu provides the BBPS UI layer and compliance, but the agent brings their own payment gateway (e.g. Razorpay, Stripe) to handle the actual money collection.\n\nBest for large agents who already have payment infrastructure but need BBPS compliance without rebuilding the UI.'}
+];
+function showTab(type,id){
+  var isFlow=(type==='flow');
+  var panel=document.getElementById(isFlow?'flow-panel':'int-panel');
+  var data=isFlow?flowSteps:intModels;
+  var idx=parseInt(id.replace(/[^0-9]/g,''));
+  var item=data[idx];
+  panel.innerHTML='<h4>'+item.t+'</h4><p style="margin-top:6px;white-space:pre-line">'+item.b+'</p>';
+  var tabs=document.querySelectorAll(isFlow?'#s3 .tab':'#s7 .tab');
+  tabs.forEach(function(t,i){t.classList.toggle('active',i===idx)});
+}
+showTab('flow','s0');
+showTab('int','i0');
+
+function showBOU(id){
+  document.querySelectorAll('.bou-tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.bou-panel').forEach(function(p){p.classList.remove('active')});
+  document.getElementById('bou-'+id).classList.add('active');
+  event.target.classList.add('active');
+  clearInterval(window._payInt);clearInterval(window._rtInt);clearInterval(window._dInt);
+}
+function litN(id,cls){var e=document.getElementById(id);if(e)e.className='flow-node-el '+(cls||'lit')}
+function unlitN(id){var e=document.getElementById(id);if(e)e.className='flow-node-el'}
+function log(id,msg,cls){var b=document.getElementById(id);if(!b)return;var d=document.createElement('div');d.className='log-line'+(cls?' '+cls:'');d.textContent=msg;b.appendChild(d);b.scrollTop=b.scrollHeight}
+function clearLog(id){var b=document.getElementById(id);if(b)b.innerHTML=''}
+
+function runFetch(){
+  clearLog('fetch-log');['fn0','fn1','fn2','fn3','fn4'].forEach(unlitN);
+  var steps=[
+    [0,'Customer enters Consumer ID',function(){litN('fn0')}],
+    [600,'Setu TSP receives Customer ID — forwards request',function(){litN('fn1')}],
+    [1300,'Axis Bank (OU) validates and routes to BBPS',function(){litN('fn2')}],
+    [2100,'BBPS routes to national network',function(){litN('fn3')}],
+    [2900,'Biller backend returns: Amount, Due Date, Name',function(){litN('fn4')}],
+    [3700,'Response flows back through chain to Customer App','success']
+  ];
+  steps.forEach(function(s){setTimeout(function(){log('fetch-log',s[1],typeof s[2]==='string'?s[2]:'');if(typeof s[2]==='function')s[2]()},s[0])});
+}
+function resetFetch(){clearLog('fetch-log');['fn0','fn1','fn2','fn3','fn4'].forEach(unlitN);log('fetch-log','Ready — click Run flow')}
+
+function runPayment(){
+  clearLog('pay-log');['pn0','pn1','pn2','pn3','pn4'].forEach(unlitN);
+  var start=Date.now();clearInterval(window._payInt);
+  window._payInt=setInterval(function(){
+    var el=Math.min((Date.now()-start)/1000,180);
+    var pct=el/180*100;
+    var bar=document.getElementById('pay-bar');
+    bar.style.width=pct+'%';
+    bar.className='timer-fill'+(pct>80?' red-fill':pct>50?' amber-fill':'');
+    document.getElementById('pay-elapsed').textContent=Math.round(el)+'s elapsed';
+    if(el>=180)clearInterval(window._payInt);
+  },50);
+  var steps=[
+    [0,'[0s] Customer initiates payment',function(){litN('pn0')}],
+    [500,'[~0s] Setu TSP — payment initiation request sent',function(){litN('pn1')}],
+    [1200,'[~1s] Axis Bank (OU) authorises and routes',function(){litN('pn2')}],
+    [2000,'[~2s] Setu BOU — Setu-Biller acknowledgement loop starts (max 120s)',function(){litN('pn3')}],
+    [3000,'[~3-120s] Biller backend acknowledges payment',function(){litN('pn4')}],
+    [4000,'[T+1] Money movement: NPCI settles Axis Bank ← Biller Bank',''],
+    [5000,'[180s] Transaction closed — receipt generated','success']
+  ];
+  steps.forEach(function(s){setTimeout(function(){log('pay-log',s[1],typeof s[2]==='string'?s[2]:'');if(typeof s[2]==='function')s[2]()},s[0])});
+}
+function resetPayment(){
+  clearInterval(window._payInt);clearLog('pay-log');['pn0','pn1','pn2','pn3','pn4'].forEach(unlitN);
+  document.getElementById('pay-bar').style.width='0%';
+  document.getElementById('pay-elapsed').textContent='0s elapsed';
+  log('pay-log','Ready — click Simulate payment');
+}
+
+function runRealtime(ackAt){
+  clearInterval(window._rtInt);clearLog('rt-log');
+  ['rtn0','rtn1','rtn2','rtn3'].forEach(unlitN);
+  document.getElementById('rtn4').style.opacity='0';
+  document.getElementById('rt-bar').style.width='0%';
+  document.getElementById('rt-elapsed').textContent='0s';
+  document.getElementById('rt-pct').textContent='0s / 120s';
+  document.getElementById('rt-status').textContent='Running';
+  var start=Date.now();var done=false;
+  log('rt-log','[0s] Payment received by BBPS — forwarding to Setu BOU');
+  litN('rtn0');litN('rtn1','lit');
+  setTimeout(function(){litN('rtn2','lit');litN('rtn3');log('rt-log','[1s] Setu forwards to Biller — waiting for acknowledgement')},600);
+  window._rtInt=setInterval(function(){
+    var el=Math.min((Date.now()-start)/1000,120);
+    var pct=el/120*100;
+    var bar=document.getElementById('rt-bar');
+    bar.style.width=pct+'%';
+    bar.className='timer-fill'+(pct>90?' red-fill':pct>60?' amber-fill':'');
+    document.getElementById('rt-elapsed').textContent=Math.round(el)+'s';
+    document.getElementById('rt-pct').textContent=Math.round(el)+'s / 120s';
+    if(ackAt<=120&&el>=ackAt&&!done){
+      done=true;clearInterval(window._rtInt);
+      litN('rtn3','success-lit');document.getElementById('rtn4').style.opacity='1';
+      document.getElementById('rt-status').textContent='Success';
+      log('rt-log','['+Math.round(el)+'s] Biller sends acknowledgement','success');
+      log('rt-log','Setu sends final confirmation to BBPS','success');
+      log('rt-log','Receipt generated instantly','success');
+    }
+    if(el>=120&&!done){
+      done=true;clearInterval(window._rtInt);
+      litN('rtn3','warn-lit');document.getElementById('rt-status').textContent='Timeout';
+      log('rt-log','[120s] Biller did not acknowledge — timeout','warn');
+      log('rt-log','CTS API called to determine ground truth status','warn');
+    }
+  },50);
+}
+function resetRealtime(){
+  clearInterval(window._rtInt);clearLog('rt-log');
+  ['rtn0','rtn1','rtn2','rtn3'].forEach(unlitN);
+  document.getElementById('rtn4').style.opacity='0';
+  document.getElementById('rt-bar').style.width='0%';
+  document.getElementById('rt-elapsed').textContent='0s';
+  document.getElementById('rt-pct').textContent='0s / 120s';
+  document.getElementById('rt-status').textContent='Waiting';
+  log('rt-log','Choose a scenario above to simulate');
+}
+
+function runDeemed(){
+  clearInterval(window._dInt);clearLog('deemed-log');
+  ['dn0','dn1','dn2','dn3'].forEach(unlitN);
+  document.getElementById('deemed-retry').style.opacity='0';
+  document.getElementById('dn3').style.opacity='0';
+  document.getElementById('retry-count').textContent='0 attempts';
+  document.getElementById('retry-bar').style.width='0%';
+  var attempt=0;
+  log('deemed-log','[0s] Payment sent to BBPS');litN('dn0');
+  setTimeout(function(){litN('dn1','lit');log('deemed-log','[0s] BBPS processes — Setu sends immediate acknowledgement')},400);
+  setTimeout(function(){litN('dn2','success-lit');log('deemed-log','[~1s] Deemed Success declared — NPCI loop closed','success');log('deemed-log','Biller not yet notified — webhook queued')},1000);
+  setTimeout(function(){
+    document.getElementById('deemed-retry').style.opacity='1';
+    document.getElementById('dn3').style.opacity='1';
+    litN('dn3','warn-lit');
+    log('deemed-log','[async] Auto-retry loop started — notifying biller via webhook','warn');
+    var rs=Date.now();
+    window._dInt=setInterval(function(){
+      var el=(Date.now()-rs)/1000;
+      attempt=Math.min(Math.floor(el/0.8)+1,3);
+      document.getElementById('retry-count').textContent=attempt+' attempt'+(attempt>1?'s':'');
+      document.getElementById('retry-bar').style.width=Math.min(el/2.4*100,100)+'%';
+      if(el>=2.4){
+        clearInterval(window._dInt);litN('dn3','success-lit');
+        log('deemed-log','[async] Biller notified after '+attempt+' attempts','success');
+        log('deemed-log','CTS API called — final ground truth status confirmed','success');
+      }
+    },50);
+  },2000);
+}
+function resetDeemed(){
+  clearInterval(window._dInt);clearLog('deemed-log');
+  ['dn0','dn1','dn2','dn3'].forEach(unlitN);
+  document.getElementById('deemed-retry').style.opacity='0';
+  document.getElementById('dn3').style.opacity='0';
+  document.getElementById('retry-count').textContent='0 attempts';
+  document.getElementById('retry-bar').style.width='0%';
+  log('deemed-log','Ready — click Run deemed flow');
+}
+</script>
+</body>
+</html>
